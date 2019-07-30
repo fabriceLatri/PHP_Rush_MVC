@@ -7,6 +7,7 @@ use \PDO;
 class ORM {
 
   private $db;
+  private $list;
 
   private static $instance = null;
 
@@ -15,6 +16,7 @@ class ORM {
    */
   private function __construct()
   {
+    $this->list = [];
   }
 
   /**
@@ -61,6 +63,8 @@ class ORM {
   public function persist($object)
   {
     // TODO: Implement this function
+    echo "coucou";
+    array_push($this->list,$object);
   }
 
   /**
