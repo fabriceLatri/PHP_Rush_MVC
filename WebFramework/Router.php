@@ -3,6 +3,7 @@
 namespace WebFramework;
 
 use WebFramework\AppController;
+use App\Controllers\Error404Controller;
 
 class Router {
 
@@ -70,9 +71,10 @@ class Router {
       $route_handler = $this->routes[$request->method][$request->route];
       $this->handle($request, $route_handler['controller'], $route_handler['handler']);
     } else {
-      // TODO: Implement a 404 view and render it with TWIG when the
-      // requested route is invalid
-      echo '<h1>Page not found</h1>';
+      if ($request->route == "PHP_Rush_MVC")
+        header ('location:/PHP_Rush_MVC/auth/register');
+      else
+        header ('location:/PHP_Rush_MVC/error404');
     }
   }
 
