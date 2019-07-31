@@ -91,8 +91,8 @@ class User
   {
     $err = '';
 
-    if (empty($this->username) || strlen($this->username) <= 3) {
-      $err = $err . "Invalid 'username' field. Must have more than 3 characters.<br>";
+    if (empty($this->username) || strlen($this->username) < 3 || strlen($this->username > 10)) {
+      $err = $err . "Invalid 'username' field. Must have at least 3 and at most 10 characters.<br>";
     }
     if (empty($this->email) || preg_match('#^[a-zA-Z0-9]+@[a-zA-Z]{2,}\.[a-z]{2,4}$#', $this->email) != 1) {
       $err = $err . "Invalid 'email' field. Wrong format.<br>";
@@ -100,11 +100,13 @@ class User
     if (empty($this->password)) {
       $err = $err . "Invalid 'password' field. Can't be blank.<br>";
     }
+    if (isset($this->passwordVerify) && !empty($this->password) && (strlen($this->password) < 8 || strlen($this->password) > 20)) {
+      $err = $err . "Invalid 'password' field. Must have at least 8 and at most 20 characters<br>";
+    }
     if (isset($this->passwordVerify) && empty($this->passwordVerify)) {
       $err = $err. "Invalid 'password confirmation' field. Can't be blank.<br>";
     }
-    if (isset($this->passwordVerify) && $this->passwordVerify !== $this->password && !empty($this->passwordVerify))
-    {
+    if (isset($this->passwordVerify) && $this->passwordVerify !== $this->password && !empty($this->passwordVerify)) {
       $err = $err. "Invalid 'password confirmation' field. The password confirmation is different from the password.<br>";
     }
 
