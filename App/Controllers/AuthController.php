@@ -30,7 +30,9 @@ class AuthController extends AppController
       return;
     }
 
-    var_dump($user);
+    // var_dump($user);
+    var_dump($this->orm);
+    $this->orm->persist($user);
     // TODO: Store user in the database with the ORM (this->orm).
     die();
   }
