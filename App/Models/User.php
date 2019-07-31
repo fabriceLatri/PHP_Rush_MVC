@@ -103,7 +103,7 @@ class User
     if (isset($this->passwordVerify) && empty($this->passwordVerify)) {
       $err = $err. "Invalid 'password confirmation' field. Can't be blank.<br>";
     }
-    if (isset($this->passwordVerify) && $this->passwordVerify !== $this->password)
+    if (isset($this->passwordVerify) && $this->passwordVerify !== $this->password && !empty($this->passwordVerify))
     {
       $err = $err. "Invalid 'password confirmation' field. The password confirmation is different from the password.<br>";
     }
