@@ -65,6 +65,7 @@ class ORM {
     // TODO: Implement this function
     echo "coucou";
     array_push($this->list,$object);
+    var_dump($this->list);
   }
 
   /**
