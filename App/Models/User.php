@@ -100,8 +100,12 @@ class User
     if (empty($this->password)) {
       $err = $err . "Invalid 'password' field. Can't be blank.<br>";
     }
-    if (empty($this->passwordVerify) || !password_verify($this->passwordVerify, $this->password)) {
-      $err = $err. "Invalid password confirmation.<br>";
+    if (empty($this->passwordVerify)) {
+      $err = $err. "Invalid 'password confirmation' field. Can't be blank.<br>";
+    }
+    if ($this->passwordVerify !== $this->password)
+    {
+      $err = $err. "Invalid 'password confirmation' field. The password confirmation is different from the password.<br>";
     }
 
     if (!empty($err)) {
