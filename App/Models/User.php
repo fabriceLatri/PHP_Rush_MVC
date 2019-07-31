@@ -24,6 +24,11 @@ class User
    */
   private $password;
 
+    /**
+   * @type string
+   */
+  private $passwordVerify;
+
   public function getId(): ?int
   {
     return $this->id;
@@ -65,6 +70,18 @@ class User
     return $this;
   }
 
+  public function getPasswordVerify()
+  {
+    return $this->passwordVerify;
+  }
+
+  public function setPasswordVerify(string $passwordVerify)
+  {
+    $this->passwordVerify = $passwordVerify;
+
+    return $this;
+  }
+
   /**
    * Validate the User model data.
    *
@@ -82,6 +99,9 @@ class User
     }
     if (empty($this->password)) {
       $err = $err . "Invalid 'password' field. Can't be blank.<br>";
+    }
+    if (empty($this->passwordVerify) || !password_verify($this->passwordVerify, $this->password)) {
+      $err = $err. "Invalid password confirmation.<br>";
     }
 
     if (!empty($err)) {
