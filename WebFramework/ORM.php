@@ -63,9 +63,7 @@ class ORM {
   public function persist($object)
   {
     // TODO: Implement this function
-    echo "coucou persist";
     array_push($this->list,$object);
-    var_dump($this->list);
   }
 
   /**
@@ -74,8 +72,11 @@ class ORM {
   public function flush()
   {
     // TODO: Implement this function
-    echo "coucou flush";
-    var_dump(get_object_vars($this->list));
+    $toto = $this->list[0];
+    $tata = get_object_vars($toto);
+    var_dump($tata);
+
+    
   }
 
 }
