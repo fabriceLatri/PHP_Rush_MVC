@@ -35,7 +35,8 @@ class AppController {
   // MAGIC GETTER
   public function __get($orm)
   {
-    return $this->orm;
+    if($orm == "orm")
+      return $this->orm;
   }
 
   /**
