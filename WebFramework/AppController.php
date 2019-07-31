@@ -32,6 +32,13 @@ class AppController {
     $this->flashError = FlashError::getInstance();
   }
 
+  // MAGIC GETTER
+  public function __get($orm)
+  {
+    if($orm == "orm")
+      return $this->orm;
+  }
+
   /**
    * Render a view.
    *
