@@ -5,6 +5,8 @@ namespace App\Controllers;
 use WebFramework\AppController;
 use WebFramework\Router;
 use WebFramework\Request;
+use App\Helpers\Session;
+
 
 use App\Models\User;
 
@@ -22,13 +24,29 @@ class LoginController extends AppController
     $user->setPassword($request->params['password']);
 
     try {
-      $user->validate();
+      // $user->validate();
     } catch (\Exception $e) {
       $this->flashError->set($e->getMessage());
       $this->redirect('/' . $request->base . 'auth/login', '302');
       return;
     }
 
+    $query = $this->orm->getDb()->prepare($user->selectUserEmail());
+    $array = [
+      'email' =>$request->params['email']
+    ];
+
+    $query->execute($array);
+    $userInfo = $query->fetch();
+
+    if ($userInfo && password_verify($request->params['password'], $userInfo['password'])){
+      $this->session->set('id' , $userInfo['id']);
+
+    }
+    else {
+      echo 'Incorrect Email or Password';
+      header('refresh:1; /PHP_Rush_MVC/auth/login');
+    }
     die();
   }
 }
