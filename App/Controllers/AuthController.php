@@ -5,7 +5,6 @@ namespace App\Controllers;
 use WebFramework\AppController;
 use WebFramework\Router;
 use WebFramework\Request;
-use App\Helpers\Session;
 
 use App\Models\User;
 
