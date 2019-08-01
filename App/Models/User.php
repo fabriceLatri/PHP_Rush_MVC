@@ -7,27 +7,27 @@ class User
   /**
    * @type integer
    */
-  public $id;
+  private $id;
 
   /**
    * @type string
    */
-  public $username;
+  private $username;
 
   /**
    * @type string
    */
-  public $email;
+  private $email;
 
   /**
    * @type string
    */
-  public $password;
+  private $password;
 
     /**
    * @type string
    */
-  public $passwordVerify;
+  private $passwordVerify;
 
   public function getId(): ?int
   {
