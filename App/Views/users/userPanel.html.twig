@@ -1,0 +1,30 @@
+{# users/userPanel.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  {{ error.get() | raw }}
+  <header>
+    {{ include('header/header.html.twig') }}
+  </header>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Edit</td>
+        <td>Delete ?</td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}
