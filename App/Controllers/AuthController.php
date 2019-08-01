@@ -5,6 +5,7 @@ namespace App\Controllers;
 use WebFramework\AppController;
 use WebFramework\Router;
 use WebFramework\Request;
+use App\Helpers\Session;
 
 use App\Models\User;
 
@@ -31,9 +32,16 @@ class AuthController extends AppController
       return;
     }
 
-    // TODO: Store user in the database with the ORM (this->orm).
-    // $this->orm->persist($user);
-    // $data = $this->orm->flush();
+    $query = $this->orm->getDb()->prepare($user->addUser());
+    $array = [
+      'username' => $request->params['username'],
+      'email' => $request->params['email'],
+      'password' => password_hash($request->params['password'], PASSWORD_DEFAULT),
+    ];
+
+    $query->execute($array);
+
+    header ('location:/PHP_Rush_MVC/auth/login');
 
     die();
   }
