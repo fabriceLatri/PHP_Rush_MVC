@@ -116,4 +116,6 @@ class User
 
     return $err;
   }
+
+  public function
 }
