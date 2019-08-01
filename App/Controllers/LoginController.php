@@ -5,7 +5,6 @@ namespace App\Controllers;
 use WebFramework\AppController;
 use WebFramework\Router;
 use WebFramework\Request;
-use App\Helpers\Session;
 
 use App\Models\User;
 
@@ -29,16 +28,6 @@ class LoginController extends AppController
       $this->redirect('/' . $request->base . 'auth/login', '302');
       return;
     }
-    $query = $this->orm->getDb()->prepare($user->addUser());
-    $array = [
-      'username' => $request->params['username'],
-      'email' => $request->params['email'],
-      'password' => password_hash($request->params['password'], PASSWORD_DEFAULT),
-    ];
-
-    $query->execute($array);
-
-    header ('location:/PHP_Rush_MVC/auth/register');
 
     die();
   }
