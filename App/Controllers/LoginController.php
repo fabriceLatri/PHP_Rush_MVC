@@ -12,7 +12,7 @@ class LoginController extends AppController
 {
   public function login_view(Request $request)
   {
-    return $this->render('register/true_register.html.twig', ['base' => $request->base,
+    return $this->render('auth/login.html.twig', ['base' => $request->base,
       'error' => $this->flashError]);
   }
 
@@ -25,7 +25,7 @@ class LoginController extends AppController
       $user->validate();
     } catch (\Exception $e) {
       $this->flashError->set($e->getMessage());
-      $this->redirect('/' . $request->base . 'register/true_register', '302');
+      $this->redirect('/' . $request->base . 'auth/login', '302');
       return;
     }
 
