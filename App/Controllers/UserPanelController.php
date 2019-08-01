@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Controllers;
+
+use WebFramework\AppController;
+use WebFramework\Router;
+use WebFramework\Request;
+use App\Helpers\Session;
+
+use App\Models\User;
+
+class UserPanelController extends AppController
+{
+  public function user_view(Request $request)
+  {
+    return $this->render('users/usersPanel.html.twig', ['base' => $request->base,
+      'error' => $this->flashError]);
+  }
+
+  public function user(Request $request) { 
+    $user = new User();
+    $user->setUsername($request->params['username']);
+    $user->setEmail($request->params['email']);
+    $user->setPassword($request->params['password']);
+    $user->setPasswordVerify($request->params['passwordVerify']);
+
+    try {
+      $user->validate();
+    } catch (\Exception $e) {
+      $this->flashError->set($e->getMessage());
+      $this->redirect('/' . $request->base . 'users/userPanel', '302');
+      return;
+    }
+
+    $query = $this->orm->getDb()->prepare($user->selectUserId());
+    $array = [
+      'username' => $request->params['username'],
+      'email' => $request->params['email'],
+      'user_group' => $request->params['user_group'],
+    ];
+
+    $query->execute($array);
+
+    header ('location:/PHP_Rush_MVC/auth/login');
+
+    die();
+  }
+}
