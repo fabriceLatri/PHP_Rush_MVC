@@ -117,5 +117,23 @@ class User
     return $err;
   }
 
-  public function
+  public function addUser(){
+    return "INSERT INTO users (username, email, password, creation_date, update_date) VALUES (:username, :email, :password, NOW(), NOW())";
+  }
+
+  public function selectAllUser(){
+    return "SELECT * FROM users";
+  }
+
+  public function selectUserId(){
+    return 'SELECT * FROM users WHERE id = :id';
+  }
+
+  public function updateInfoUser(){
+    return "UPDATE users SET username = :username, email = :email, password = :password, update_date = :NOW() WHERE id = :id";
+  }
+
+  public function deleteUserId(){
+    return "DELETE FROM users WHERE id = :id";
+  }
 }

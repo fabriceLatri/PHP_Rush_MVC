@@ -45,6 +45,7 @@ class Session
     return false;
   }
 
+
   /**
    * Verify if an attribute is existing and set.
    *

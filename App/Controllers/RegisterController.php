@@ -5,6 +5,7 @@ namespace App\Controllers;
 use WebFramework\AppController;
 use WebFramework\Router;
 use WebFramework\Request;
+use App\Helpers\Session;
 
 use App\Models\User;
 
@@ -16,7 +17,7 @@ class RegisterController extends AppController
       'error' => $this->flashError]);
   }
 
-  public function true_register(Request $request) { 
+  public function true_register(Request $request) {
     $user = new User();
     $user->setUsername($request->params['username']);
     $user->setEmail($request->params['email']);
@@ -30,6 +31,16 @@ class RegisterController extends AppController
       $this->redirect('/' . $request->base . 'register/true_register', '302');
       return;
     }
+    $query = $this->orm->getDb()->prepare($user->addUser());
+    $array = [
+      'username' => $request->params['username'],
+      'email' => $request->params['email'],
+      'password' => password_hash($request->params['password'], PASSWORD_DEFAULT),
+    ];
+
+    $query->execute($array);
+
+    header ('location:/PHP_Rush_MVC/auth/register');
 
     die();
   }

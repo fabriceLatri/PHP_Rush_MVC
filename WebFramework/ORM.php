@@ -55,6 +55,10 @@ class ORM {
     }
   }
 
+  public function getDb(){
+    return $this->db;
+  }
+
   /**
    * Make a model instance managed by the ORM.
    *
@@ -64,6 +68,7 @@ class ORM {
   {
     // TODO: Implement this function
     array_push($this->list,$object);
+    var_dump($this->list);
   }
 
   /**

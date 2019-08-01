@@ -30,6 +30,7 @@ class AppController {
     $this->flashError = FlashError::getInstance();
   }
 
+
   // MAGIC GETTER
   public function __get($orm)
   {
