@@ -121,6 +121,10 @@ class User
     return "INSERT INTO users (username, email, password, creation_date, update_date) VALUES (:username, :email, :password, NOW(), NOW())";
   }
 
+  public function selectUserEmail(){
+    return 'SELECT * FROM users WHERE email = :email';
+  }
+
   public function selectAllUser(){
     return "SELECT * FROM users";
   }
