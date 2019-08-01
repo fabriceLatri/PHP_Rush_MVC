@@ -72,11 +72,6 @@ class ORM {
   public function flush()
   {
     // TODO: Implement this function
-    $toto = $this->list[0];
-    $tata = get_object_vars($toto);
-    var_dump($tata);
-
-    
   }
 
 }
