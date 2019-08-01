@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <form action="/{{ base }}auth/register" name="sentMessage" id="contactForm" method="post" novalidate>
+        <form action="/{{ base }}register/true_register" name="sentMessage" id="contactForm" method="post" novalidate>
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Name</label>
@@ -29,6 +29,13 @@
               <label>Password</label>
               <input type="password" class="form-control" placeholder="Password" id="password" name="password"
                required data-validation-required-message="Please enter your password.">
+              <p class="help-block text-danger"></p>
+            </div>
+          <div class="control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>Password confirmation</label>
+              <input type="password" class="form-control" placeholder="Password confirmation" id="passwordVerify" name="passwordVerify"
+               required data-validation-required-message="Please confirm your password.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
