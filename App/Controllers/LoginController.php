@@ -9,26 +9,24 @@ use App\Helpers\Session;
 
 use App\Models\User;
 
-class RegisterController extends AppController
+class LoginController extends AppController
 {
-  public function true_register_view(Request $request)
+  public function login_view(Request $request)
   {
-    return $this->render('register/true_register.html.twig', ['base' => $request->base,
+    return $this->render('auth/login.html.twig', ['base' => $request->base,
       'error' => $this->flashError]);
   }
 
-  public function true_register(Request $request) {
+  public function login(Request $request) { 
     $user = new User();
-    $user->setUsername($request->params['username']);
     $user->setEmail($request->params['email']);
     $user->setPassword($request->params['password']);
-    $user->setPasswordVerify($request->params['passwordVerify']);
 
     try {
       $user->validate();
     } catch (\Exception $e) {
       $this->flashError->set($e->getMessage());
-      $this->redirect('/' . $request->base . 'register/true_register', '302');
+      $this->redirect('/' . $request->base . 'auth/login', '302');
       return;
     }
     $query = $this->orm->getDb()->prepare($user->addUser());
