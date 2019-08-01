@@ -21,6 +21,7 @@ class AuthController extends AppController
     $user->setUsername($request->params['username']);
     $user->setEmail($request->params['email']);
     $user->setPassword($request->params['password']);
+    $user->setPasswordVerify($request->params['passwordVerify']);
 
     try {
       $user->validate();
