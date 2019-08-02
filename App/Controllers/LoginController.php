@@ -31,18 +31,13 @@ class LoginController extends AppController
       return;
     }
 
-    // $query = $this->orm->getDb()->prepare($user->selectUserEmail());
-    // $array = [
-    //   'email' =>$request->params['email']
-    // ];
-
     $userInfo = $this->orm->prepareRequest($user,"selectUserEmail",['email']);
-      var_dump($userInfo);
-    // $query->execute(['email']);
-    ;
+
     if (!empty($userInfo) && password_verify($request->params['password'], $userInfo[0]['password'])){
       $this->session->set('id' , $userInfo[0]['id']);
 
+    header('location:/PHP_Rush_MVC/users/userPanel');
+    
     }
     else {
       echo 'Incorrect Email or Password';
