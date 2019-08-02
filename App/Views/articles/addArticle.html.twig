@@ -1,0 +1,44 @@
+{# auth/register.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  {{ error.get() | raw }}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <form action="/{{ base }}articles/addArticle" name="sentMessage" id="contactForm" method="post" novalidate>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>title</label>
+              <input type="text" class="form-control" placeholder="title" id="title" name="title" required
+                 data-validation-required-message="Please enter your title.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Content</label>
+              <input type="text" class="form-control" placeholder="Content" id="content" name="content"
+                required data-validation-required-message="Please enter your content.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>Author</label>
+              <input type="text" class="form-control" placeholder="Author" id="author" name="author"
+               required data-validation-required-message="Please enter your name.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div id="success"></div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-secondary" id="sendMessageButton">Add Article</button>
+          </div>
+        </form>
+        <a title="Redirection to login" href="/PHP_Rush_MVC/auth/login">Login Page</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
