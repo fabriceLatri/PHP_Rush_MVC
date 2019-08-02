@@ -68,7 +68,6 @@ class ListarticleController extends AppController
 
     $query->execute($array);
 
-    echo "coucou bien joué";
 
     // header ('location:/PHP_Rush_MVC/auth/login');
 
