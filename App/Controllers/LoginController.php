@@ -29,6 +29,8 @@ class LoginController extends AppController
       return;
     }
 
+    header('location:/PHP_Rush_MVC/users/userPanel');
+
     die();
   }
 }
