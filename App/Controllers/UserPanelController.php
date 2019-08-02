@@ -13,7 +13,7 @@ class UserPanelController extends AppController
 {
   public function user_view(Request $request)
   {
-    return $this->render('users/usersPanel.html.twig', ['base' => $request->base,
+    return $this->render('users/userPanel.html.twig', ['base' => $request->base,
       'error' => $this->flashError]);
   }
 
@@ -21,8 +21,6 @@ class UserPanelController extends AppController
     $user = new User();
     $user->setUsername($request->params['username']);
     $user->setEmail($request->params['email']);
-    $user->setPassword($request->params['password']);
-    $user->setPasswordVerify($request->params['passwordVerify']);
 
     try {
       $user->validate();
@@ -32,7 +30,7 @@ class UserPanelController extends AppController
       return;
     }
 
-    $query = $this->orm->getDb()->prepare($user->selectUserId());
+    $query = $this->orm->getDb()->prepare($user->addUser());
     $array = [
       'username' => $request->params['username'],
       'email' => $request->params['email'],
@@ -40,8 +38,6 @@ class UserPanelController extends AppController
     ];
 
     $query->execute($array);
-
-    header ('location:/PHP_Rush_MVC/auth/login');
 
     die();
   }
