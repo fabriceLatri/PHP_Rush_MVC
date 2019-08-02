@@ -31,16 +31,17 @@ class LoginController extends AppController
       return;
     }
 
-    $query = $this->orm->getDb()->prepare($user->selectUserEmail());
-    $array = [
-      'email' =>$request->params['email']
-    ];
+    // $query = $this->orm->getDb()->prepare($user->selectUserEmail());
+    // $array = [
+    //   'email' =>$request->params['email']
+    // ];
 
-    $query->execute($array);
-    $userInfo = $query->fetch();
-
-    if ($userInfo && password_verify($request->params['password'], $userInfo['password'])){
-      $this->session->set('id' , $userInfo['id']);
+    $userInfo = $this->orm->prepareRequest($user,"selectUserEmail",['email']);
+      var_dump($userInfo);
+    // $query->execute(['email']);
+    ;
+    if (!empty($userInfo) && password_verify($request->params['password'], $userInfo[0]['password'])){
+      $this->session->set('id' , $userInfo[0]['id']);
 
     }
     else {
