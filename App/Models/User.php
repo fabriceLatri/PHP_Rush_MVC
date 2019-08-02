@@ -91,7 +91,7 @@ class User
   {
     $err = '';
 
-    if (isset($this->passwordVerify) && empty($this->username) || strlen($this->username) < 3 || strlen($this->username > 10)) {
+    if (isset($this->passwordVerify) && (empty($this->username) || strlen($this->username) < 3 || strlen($this->username > 10))) {
       $err = $err . "Invalid 'username' field. Must have at least 3 and at most 10 characters.<br>";
     }
     if (empty($this->email) || preg_match('#^[a-zA-Z0-9]+@[a-zA-Z]{2,}\.[a-z]{2,4}$#', $this->email) != 1) {
