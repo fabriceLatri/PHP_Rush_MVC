@@ -79,4 +79,17 @@ class ORM {
     // TODO: Implement this function
   }
 
+  public function prepareRequest($model,$query,$field){
+    $this->db->prepare($model->$query());
+    foreach ($field as $value){
+      $keyField = ucwords($value);
+      $method = "get".$keyField;
+      $values = $model->$method();
+    };
+    $field = [$value => $values];
+    $request = $this->db->prepare($model->$query());
+    $request->execute($field);
+    return $request->fetchAll(PDO::FETCH_ASSOC);
+  }
+
 }
