@@ -24,7 +24,7 @@ class LoginController extends AppController
     $user->setPassword($request->params['password']);
 
     try {
-      // $user->validate();
+      $user->validate();
     } catch (\Exception $e) {
       $this->flashError->set($e->getMessage());
       $this->redirect('/' . $request->base . 'auth/login', '302');
@@ -42,6 +42,7 @@ class LoginController extends AppController
     ;
     if (!empty($userInfo) && password_verify($request->params['password'], $userInfo[0]['password'])){
       $this->session->set('id' , $userInfo[0]['id']);
+      header('location:/PHP_Rush_MVC/articles/listArticle');
 
     }
     else {
