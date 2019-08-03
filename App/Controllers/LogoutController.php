@@ -10,52 +10,30 @@ use App\Helpers\Session;
 
 use App\Models\User;
 
-if (isset($this->session)){
 
 
 
-    class LoginController extends AppController
+class LogoutController extends AppController
+{
+    public function logout_view(Request $request)
     {
-    public function login_view(Request $request)
-    {
-        return $this->render('auth/login.html.twig', ['base' => $request->base,
-        'error' => $this->flashError]);
+        if (isset($_SESSION)) {
+            return $this->render('auth/logout.html.twig', [
+                'base' => $request->base,
+                'error' => $this->flashError
+            ]);
+        } else {
+            header('location:/PHP_Rush_MVC/auth/login');
+        }
     }
 
-    public function login(Request $request) { 
+    public function logout(Request $request)
+    {
         $user = new User();
-        $user->setEmail($request->params['email']);
-        $user->setPassword($request->params['password']);
+        session_destroy();
+        echo "You are disconnected !";
+        header('refresh:3; /PHP_Rush_MVC/auth/login');
 
-        try {
-        // $user->validate();
-        } catch (\Exception $e) {
-        $this->flashError->set($e->getMessage());
-        $this->redirect('/' . $request->base . 'auth/login', '302');
-        return;
-        }
-
-        // $query = $this->orm->getDb()->prepare($user->selectUserEmail());
-        // $array = [
-        //   'email' =>$request->params['email']
-        // ];
-
-        $userInfo = $this->orm->prepareRequest($user,"selectUserEmail",['email']);
-        var_dump($userInfo);
-        // $query->execute(['email']);
-        ;
-        if (!empty($userInfo) && password_verify($request->params['password'], $userInfo[0]['password'])){
-        $this->session->set('id' , $userInfo[0]['id']);
-
-        }
-        else {
-        echo 'Incorrect Email or Password';
-        header('refresh:1; /PHP_Rush_MVC/auth/login');
-        }
         die();
     }
-    }
-}
-else{
-    header ('location:/PHP_Rush_MVC/auth/login');
 }
