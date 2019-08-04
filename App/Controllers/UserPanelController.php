@@ -13,8 +13,12 @@ class UserPanelController extends AppController
 {
   public function user_view(Request $request)
   {
+    $user = new user();
+    $user->setId($_SESSION['id']);
+    $userInfo = $this->orm->prepareRequest($user, "selectUserId", ['id']);
     return $this->render('users/userPanel.html.twig', ['base' => $request->base,
-      'error' => $this->flashError]);
+      'error' => $this->flashError,
+      'userInfo' => $userInfo]);
   }
 
   public function user(Request $request) { 
