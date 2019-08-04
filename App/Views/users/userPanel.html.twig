@@ -10,21 +10,21 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Username</th>
         <th scope="col">Email</th>
         <th scope="col">Group</th>
       </tr>
     </thead>
     <tbody>
+    {% for user in userInfo %}
       <tr>
-        <th scope="row">1</th>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.user_group}}</td>
         <td>Edit</td>
         <td>Delete ?</td>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}
