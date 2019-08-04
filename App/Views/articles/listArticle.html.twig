@@ -26,8 +26,10 @@
         <td>{{article.title}}</td>
         <td>{{article.content}}</td>
         <td>{{article.author}}</td>
+        {% if user_group != "USER" %}
         <td>Edit</td>
         <td>Delete ?</td>
+        {% endif %}
       </tr>
       {% endfor %}
     </tbody>
