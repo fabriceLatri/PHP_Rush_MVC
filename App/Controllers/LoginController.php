@@ -35,6 +35,7 @@ class LoginController extends AppController
 
     if (!empty($userInfo) && password_verify($request->params['password'], $userInfo[0]['password'])){
       $this->session->set('id' , $userInfo[0]['id']);
+      $this->session->set('user_group', $userInfo[0]['user_group']);
       header('location:/PHP_Rush_MVC/articles/listArticle');
 
     
