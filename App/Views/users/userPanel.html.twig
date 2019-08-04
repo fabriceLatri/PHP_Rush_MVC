@@ -17,14 +17,16 @@
       </tr>
     </thead>
     <tbody>
+      {% for user in userInfo %}
       <tr>
-        <th scope="row">1</th>
-        <td></td>
-        <td></td>
-        <td></td>
+        <th scope="row">{{user.id}}</th>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.user_group}}</td>
         <td>Edit</td>
         <td>Delete ?</td>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}
