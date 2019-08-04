@@ -26,9 +26,9 @@
         <td>{{article.title}}</td>
         <td>{{article.content}}</td>
         <td>{{article.author}}</td>
-        {% if user_group != "USER" %}
-        <td>Edit</td>
-        <td>Delete ?</td>
+        {% if user_group == "ADMIN" %}
+        <td><a href="/PHP_Rush_MVC/articles/editArticle">Edit</a></td>
+        <td><a href="/PHP_Rush_MVC/articles/deleteArticle">Delete </a></td>
         {% endif %}
       </tr>
       {% endfor %}

@@ -51,4 +51,47 @@ class UserPanelController extends AppController
 
     die();
   }
+
+  public function editUser_view(Request $request)
+  {
+    $user = new User();
+    $userInfo = $this->orm->prepareRequest($user, "selectAllUser", ['id']);
+    $this->render('articles/editArticle.html.twig', [
+      'base' => $request->base,
+      'error' => $this->flashError,
+      'userInfo' => $userInfo,
+      'user_group' => $_SESSION['user_group']
+    ]);
+  }
+
+  public function editUser(Request $request){
+    $user = new User();
+    $user->setId($request->params['id']);
+    $user->setUsername($request->params['username']);
+    $user->setEmail($request->params['email']);
+    $user->setPassword($request->params['password']);
+    $user->setPasswordVerify($request->params['passwordVerify']);
+
+    try {
+      $user->validate();
+    } catch (\Exception $e) {
+      $this->flashError->set($e->getMessage());
+      $this->redirect('/' . $request->base . 'articles/addArticle', '302');
+      return;
+    }
+    $listInfo = $this->orm->getDb()->prepare($user->updateInfoUser());
+    $update = [
+      'id' => $request->params['id'],
+      'username' => $request->params['username'],
+      'email' => $request->params['email'],
+      'password' => $request->params['password'],
+      'password_verify' => $request->params['passwordVerify'],
+    ];
+
+    $listInfo->execute($update);
+
+    header('location:/PHP_Rush_MVC/articles/listArticle');
+
+    die();
+  }
 }
