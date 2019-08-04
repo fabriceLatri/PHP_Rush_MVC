@@ -34,6 +34,12 @@ class User
     return $this->id;
   }
 
+  public function setId($id){
+    $this->id = $id;
+
+    return $this;
+  }
+
   public function getUsername(): ?string
   {
     return $this->username;
@@ -130,7 +136,7 @@ class User
   }
 
   public function selectUserId(){
-    return 'SELECT * FROM users WHERE id = :id';
+    return "SELECT * FROM users WHERE id = :id";
   }
 
   public function updateInfoUser(){
