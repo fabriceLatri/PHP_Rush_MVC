@@ -11,38 +11,19 @@ use App\Models\Article;
 class ListarticleController extends AppController
 {
   public function listArticle_view(Request $request)
-  { 
-    $article = new Article();
-    $listInfo = $this->orm->prepareRequest($article,"selectAllArticle",['author']);
-    $this->render('articles/listArticle.html.twig', ['base' => $request->base,
-    'error' => $this->flashError,
-    'listInfo' => $listInfo,
-    ]);
-
-        // $i = 0;   
-        // $this->render('articles/listArticle.html.twig', ['base' => $request->base,
-        // 'error' => $this->flashError,
-        // 'i' => $i + 1,
-        // 'id' => $listInfo[$i]['id'],
-        // 'title' => $listInfo[$i]['title'],
-        // 'content' => $listInfo[$i]['content'],
-        // 'author' => $listInfo[$i]['author'],
-        // ]);
-
-    // for ($i = 0; $i < count($listInfo); $i++){
-    //     $this->render('articles/tableArticle.html.twig', ['base' => $request->base,  
-    //   'error' => $this->flashError,
-    //     'i' => $i + 1,
-    //     'id' => $listInfo[$i]['id'],
-    //     'title' => $listInfo[$i]['title'],
-    //     'content' => $listInfo[$i]['content'],
-    //     'author' => $listInfo[$i]['author'],]);
-    // }
-
-    // $this->render('articles/endTable.html.twig', ['base' => $request->base,
-    //   'error' => $this->flashError,
-    // ]);
-
+  {
+    if (!empty($_SESSION['id']))
+    {
+      $article = new Article();
+      $listInfo = $this->orm->prepareRequest($article,"selectAllArticle",['author']);
+       return $this->render('articles/listArticle.html.twig', ['base' => $request->base,
+      'error' => $this->flashError,
+      'listInfo' => $listInfo,
+      ]);
+    }
+    else{
+      header('location:/PHP_Rush_MVC/auth/login');
+    }
   }
 
   public function addArticle(Request $request) { 
@@ -69,7 +50,7 @@ class ListarticleController extends AppController
     $query->execute($array);
 
 
-    // header ('location:/PHP_Rush_MVC/auth/login');
+    header ('location:/PHP_Rush_MVC/articles/listArticle');
 
     die();
   }
