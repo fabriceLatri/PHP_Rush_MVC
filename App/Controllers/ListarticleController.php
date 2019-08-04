@@ -19,6 +19,7 @@ class ListarticleController extends AppController
        return $this->render('articles/listArticle.html.twig', ['base' => $request->base,
       'error' => $this->flashError,
       'listInfo' => $listInfo,
+      'user_group' => $_SESSION['user_group']
       ]);
     }
     else{
