@@ -17,7 +17,7 @@ class LogoutController extends AppController
 {
     public function logout_view(Request $request)
     {
-        if (isset($_SESSION)) {
+        if (!empty($_SESSION)) {
             return $this->render('auth/logout.html.twig', [
                 'base' => $request->base,
                 'error' => $this->flashError
@@ -29,10 +29,11 @@ class LogoutController extends AppController
 
     public function logout(Request $request)
     {
-        $user = new User();
-        session_destroy();
-        echo "You are disconnected !";
-        header('refresh:3; /PHP_Rush_MVC/auth/login');
+        $this->session->getValues();
+        $this->session->remove("id");
+        $this->session->destroy();
+
+        header('location: /PHP_Rush_MVC/auth/login');
 
         die();
     }
