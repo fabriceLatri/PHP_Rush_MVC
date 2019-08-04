@@ -24,11 +24,6 @@ class Article
    */
   private $author;
 
-    /**
-   * @type string
-   */
-  private $passwordVerify;
-
   public function getId(): ?int
   {
     return $this->id;
