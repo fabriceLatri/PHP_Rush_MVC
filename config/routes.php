@@ -15,6 +15,9 @@ $router->use('GET', '/users/userPanel', new App\Controllers\UserPanelController(
 $router->use('POST', '/users/userPanel', new App\Controllers\UserPanelController(), 'user');
 $router->use('GET', '/users/editUsers', new App\Controllers\UserPanelController(), 'editUser_view');
 $router->use('POST', '/users/editUsers', new App\Controllers\UserPanelController(), 'editUser');
+$router->use('GET', '/users/deleteUsers', new App\Controllers\UserPanelController(), 'deleteUser_view');
+$router->use('POST', '/users/deleteUsers', new App\Controllers\UserPanelController(), 'deleteUser');
+
 
 
 $router->use('GET', '/articles/addArticle', new App\Controllers\ArticleController(), 'addArticle_view');
