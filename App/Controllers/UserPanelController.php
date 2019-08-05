@@ -55,8 +55,9 @@ class UserPanelController extends AppController
   public function editUser_view(Request $request)
   {
     $user = new User();
-    $userInfo = $this->orm->prepareRequest($user, "selectAllUser", ['id']);
-    $this->render('articles/editArticle.html.twig', [
+    $user->setId($_SESSION['id']);
+    $userInfo = $this->orm->prepareRequest($user, "selectUserId", ['id']);
+    $this->render('users/editUsers.html.twig', [
       'base' => $request->base,
       'error' => $this->flashError,
       'userInfo' => $userInfo,
@@ -76,12 +77,11 @@ class UserPanelController extends AppController
       $user->validate();
     } catch (\Exception $e) {
       $this->flashError->set($e->getMessage());
-      $this->redirect('/' . $request->base . 'articles/addArticle', '302');
+      $this->redirect('/' . $request->base . 'users/editUsers', '302');
       return;
     }
     $listInfo = $this->orm->getDb()->prepare($user->updateInfoUser());
     $update = [
-      'id' => $request->params['id'],
       'username' => $request->params['username'],
       'email' => $request->params['email'],
       'password' => $request->params['password'],
@@ -90,7 +90,7 @@ class UserPanelController extends AppController
 
     $listInfo->execute($update);
 
-    header('location:/PHP_Rush_MVC/articles/listArticle');
+    header('location:/PHP_Rush_MVC/users/userPanel');
 
     die();
   }
