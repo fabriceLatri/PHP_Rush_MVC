@@ -140,7 +140,7 @@ class User
   }
 
   public function updateInfoUser(){
-    return "UPDATE users SET username = :username, email = :email, password = :password, update_date = :NOW() WHERE id = :id";
+    return "UPDATE users SET username = :username, email = :email, password = :password, update_date = NOW() WHERE id = :id";
   }
 
   public function deleteUserId(){

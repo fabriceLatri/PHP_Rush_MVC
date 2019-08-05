@@ -29,6 +29,12 @@ class Article
     return $this->id;
   }
 
+  public function setId($id): self
+  {
+    $this->id = $id;
+    return $this;
+  }
+
   public function getTitle(): ?string
   {
     return $this->title;
@@ -129,7 +135,7 @@ class Article
   }
 
   public function updateInfoArticle(){
-    return "UPDATE articles SET title = :title, content = :content, author = :author, update_date = :NOW() WHERE id = :id";
+    return "UPDATE articles SET title = :title, content = :content, author = :author, update_date = NOW() WHERE id = :id";
   }
 
   public function deleteUserId(){
