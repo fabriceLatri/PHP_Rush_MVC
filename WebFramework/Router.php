@@ -77,5 +77,4 @@ class Router {
         header ('location:/PHP_Rush_MVC/error404');
     }
   }
-
 }

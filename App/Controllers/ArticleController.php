@@ -40,11 +40,7 @@ class ArticleController extends AppController
     $query->execute($array);
 
     header('location:/PHP_Rush_MVC/articles/listArticle');
-
-    // return $this->render('articles/listArticle.html.twig', ['base' => $request->base,
-    //   'error' => $this->flashError,
-    //   'data' => $array,]);
-
+    
     die();
   }
 }

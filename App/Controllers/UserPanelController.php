@@ -49,10 +49,6 @@ class UserPanelController extends AppController
   
       header('location:/PHP_Rush_MVC/users/userPanel');
   
-      // return $this->render('users/userPanel.html.twig', ['base' => $request->base,
-      // 'error' => $this->flashError,
-      // 'data' => $array]);
-  
       die();
     }
 

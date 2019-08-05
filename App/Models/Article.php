@@ -71,18 +71,6 @@ class Article
     return $this;
   }
 
-  // public function getPasswordVerify()
-  // {
-  //   return $this->passwordVerify;
-  // }
-
-  // public function setPasswordVerify(string $passwordVerify)
-  // {
-  //   $this->passwordVerify = $passwordVerify;
-
-  //   return $this;
-  // }
-
   /**
    * Validate the User model data.
    *
@@ -101,15 +89,6 @@ class Article
     if (empty($this->author)) {
       $err = $err . "Invalid 'author' field. Can't be blank.<br>";
     }
-    // if (isset($this->passwordVerify) && !empty($this->password) && (strlen($this->password) < 8 || strlen($this->password) > 20)) {
-    //   $err = $err . "Invalid 'password' field. Must have at least 8 and at most 20 characters<br>";
-    // }
-    // if (isset($this->passwordVerify) && empty($this->passwordVerify)) {
-    //   $err = $err. "Invalid 'password confirmation' field. Can't be blank.<br>";
-    // }
-    // if (isset($this->passwordVerify) && $this->passwordVerify !== $this->password && !empty($this->passwordVerify)) {
-    //   $err = $err. "Invalid 'password confirmation' field. The password confirmation is different from the password.<br>";
-    // }
 
     if (!empty($err)) {
       throw new \Exception($err);
