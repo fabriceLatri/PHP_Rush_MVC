@@ -67,7 +67,7 @@ class UserPanelController extends AppController
 
   public function editUser(Request $request){
     $user = new User();
-    $user->setId($request->params['id']);
+    $user->setId($_SESSION['id']);
     $user->setUsername($request->params['username']);
     $user->setEmail($request->params['email']);
     $user->setPassword($request->params['password']);
@@ -82,10 +82,10 @@ class UserPanelController extends AppController
     }
     $listInfo = $this->orm->getDb()->prepare($user->updateInfoUser());
     $update = [
+      'id' => $_SESSION['id'],
       'username' => $request->params['username'],
       'email' => $request->params['email'],
       'password' => $request->params['password'],
-      'password_verify' => $request->params['passwordVerify'],
     ];
 
     $listInfo->execute($update);
