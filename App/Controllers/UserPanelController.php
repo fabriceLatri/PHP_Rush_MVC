@@ -55,26 +55,6 @@ class UserPanelController extends AppController
   
       die();
     }
-<<<<<<< HEAD
-=======
-
-    $query = $this->orm->getDb()->prepare($user->addUser());
-    $array = [
-      'username' => $request->params['username'],
-      'email' => $request->params['email'],
-      'user_group' => $request->params['user_group'],
-    ];
-
-    $query->execute($array);
-
-    header('location:/PHP_Rush_MVC/users/userPanel');
-
-    // return $this->render('users/userPanel.html.twig', ['base' => $request->base,
-    // 'error' => $this->flashError,
-    // 'data' => $array]);
-
-    die();
-  }
 
   public function editUser_view(Request $request)
   {
@@ -118,5 +98,4 @@ class UserPanelController extends AppController
 
     die();
   }
->>>>>>> 4ec7cf447ad626c0964fd147fc48fa7f211bc51d
 }
