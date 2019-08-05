@@ -94,4 +94,27 @@ class UserPanelController extends AppController
 
     die();
   }
+
+  public function deleteUser_view(Request $request)
+  {
+    $user = new User();
+    $user->setId($_SESSION['id']);
+    $userInfo = $this->orm->prepareRequest($user, "selectUserId", ['id']);
+    $this->render('users/deleteUsers.html.twig', [
+      'base' => $request->base,
+      'error' => $this->flashError,
+      'userInfo' => $userInfo,
+      'user_group' => $_SESSION['user_group']
+    ]);
+  }
+
+  public function deleteUser(Request $request){
+    $user = new User();
+    $user->setId($_SESSION['id']);
+    $deleteInfo = $this->orm->getDb()->prepare($user->deleteUserId());
+    $data = ["id" =>$_SESSION['id']];
+    $deleteInfo->execute($data);
+
+    header('location:/PHP_Rush_MVC/auth/register');
+  }
 }
