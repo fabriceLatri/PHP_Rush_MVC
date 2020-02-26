@@ -2,3 +2,7 @@ RewriteEngine on
 RewriteBase /PHP_Rush_MVC/
 RewriteRule /WebRoot [L]
 RewriteRule (.*) WebRoot/$1 [L]
+
+# Displaying php errors
+php_flag display_errors on
+php_value error_reporting 6143
