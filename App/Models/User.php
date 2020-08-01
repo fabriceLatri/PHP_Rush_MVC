@@ -24,7 +24,7 @@ class User
    */
   private $password;
 
-    /**
+  /**
    * @type string
    */
   private $passwordVerify;
@@ -34,7 +34,8 @@ class User
     return $this->id;
   }
 
-  public function setId($id){
+  public function setId($id)
+  {
     $this->id = $id;
 
     return $this;
@@ -100,7 +101,7 @@ class User
     if (isset($this->passwordVerify) && (empty($this->username) || strlen($this->username) < 3 || strlen($this->username > 10))) {
       $err = $err . "Invalid 'username' field. Must have at least 3 and at most 10 characters.<br>";
     }
-    if (empty($this->email) || preg_match('#^[a-zA-Z0-9]+@[a-zA-Z]{2,}\.[a-z]{2,4}$#', $this->email) != 1) {
+    if (empty($this->email) || /*preg_match('#^[a-zA-Z0-9]+@[a-zA-Z]{2,}\.[a-z]{2,4}$#', $this->email) != 1 */ !filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
       $err = $err . "Invalid 'email' field. Wrong format.<br>";
     }
     if (empty($this->password)) {
@@ -110,10 +111,10 @@ class User
       $err = $err . "Invalid 'password' field. Must have at least 8 and at most 20 characters<br>";
     }
     if (isset($this->passwordVerify) && empty($this->passwordVerify)) {
-      $err = $err. "Invalid 'password confirmation' field. Can't be blank.<br>";
+      $err = $err . "Invalid 'password confirmation' field. Can't be blank.<br>";
     }
     if (isset($this->passwordVerify) && $this->passwordVerify !== $this->password && !empty($this->passwordVerify)) {
-      $err = $err. "Invalid 'password confirmation' field. The password confirmation is different from the password.<br>";
+      $err = $err . "Invalid 'password confirmation' field. The password confirmation is different from the password.<br>";
     }
 
     if (!empty($err)) {
@@ -123,27 +124,33 @@ class User
     return $err;
   }
 
-  public function addUser(){
+  public function addUser()
+  {
     return "INSERT INTO users (username, email, password, creation_date, update_date) VALUES (:username, :email, :password, NOW(), NOW())";
   }
 
-  public function selectUserEmail(){
+  public function selectUserEmail()
+  {
     return 'SELECT * FROM users WHERE email = :email';
   }
 
-  public function selectAllUser(){
+  public function selectAllUser()
+  {
     return "SELECT * FROM users";
   }
 
-  public function selectUserId(){
+  public function selectUserId()
+  {
     return "SELECT * FROM users WHERE id = :id";
   }
 
-  public function updateInfoUser(){
+  public function updateInfoUser()
+  {
     return "UPDATE users SET username = :username, email = :email, password = :password, update_date = NOW() WHERE id = :id";
   }
 
-  public function deleteUserId(){
+  public function deleteUserId()
+  {
     return "DELETE FROM users WHERE id = :id";
   }
 }

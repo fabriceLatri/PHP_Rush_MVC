@@ -4,7 +4,8 @@ namespace WebFramework;
 
 use \PDO;
 
-class ORM {
+class ORM
+{
 
   private $db;
   private $list;
@@ -26,11 +27,11 @@ class ORM {
    */
   public static function getInstance()
   {
-      if (is_null(self::$instance)) {
-          self::$instance = new ORM();
-      }
+    if (is_null(self::$instance)) {
+      self::$instance = new ORM();
+    }
 
-      return self::$instance;
+    return self::$instance;
   }
 
   /**
@@ -49,13 +50,13 @@ class ORM {
         $config['options']
       );
       return $this->db;
-    }
-    catch (Exception $e) {
+    } catch (Exception $e) {
       echo $e->getMessage();
     }
   }
 
-  public function getDb(){
+  public function getDb()
+  {
     return $this->db;
   }
 
@@ -67,7 +68,7 @@ class ORM {
   public function persist($object)
   {
     // TODO: Implement this function
-    array_push($this->list,$object);
+    array_push($this->list, $object);
     var_dump($this->list);
   }
 
@@ -79,11 +80,12 @@ class ORM {
     // TODO: Implement this function
   }
 
-  public function prepareRequest($model,$query,$field){
+  public function prepareRequest($model, $query, $field)
+  {
     $this->db->prepare($model->$query());
-    foreach ($field as $value){
+    foreach ($field as $value) {
       $keyField = ucwords($value);
-      $method = "get".$keyField;
+      $method = "get" . $keyField;
       $values = $model->$method();
     };
     $field = [$value => $values];

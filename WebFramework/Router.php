@@ -5,7 +5,8 @@ namespace WebFramework;
 use WebFramework\AppController;
 use App\Controllers\Error404Controller;
 
-class Router {
+class Router
+{
 
   private $routes = [
     'GET' => [],
@@ -19,7 +20,8 @@ class Router {
    * @param string $file - Path of the file describing the routes.
    * @return Router - Static instance of the Router class.
    */
-  public static function load(string $file) {
+  public static function load(string $file)
+  {
     $router = new static();
     require $file;
 
@@ -34,7 +36,8 @@ class Router {
    * @param Controller $controller - Class containing the handler method.
    * @param function $handler - Function used to handle incoming requests on the route.
    */
-  public function use(string $requestType, string $route, AppController $controller, string $handler) {
+  public function use(string $requestType, string $route, AppController $controller, string $handler)
+  {
     $this->routes[$requestType][$route] = [
       'controller' => $controller,
       'handler' => $handler
@@ -50,7 +53,8 @@ class Router {
    * @param string $handler - Name of the route handler which is orcherstrating
    *   every interations wih the views and the database.
    */
-  public function handle(Request $request, AppController $controller, string $handler) {
+  public function handle(Request $request, AppController $controller, string $handler)
+  {
     if (!method_exists($controller, $handler)) {
       $controller_name = get_class($controller);
       throw new \Exception("{$controller_name} does not have {$handler}");
@@ -65,16 +69,19 @@ class Router {
    * @param Request $request - A simplified and object-style abstraction
    *   of the incomings HTTP requests.
    */
-  public function dispatch(Request $request) {
-    if (array_key_exists($request->method, $this->routes)
-        && array_key_exists($request->route, $this->routes[$request->method])) {
+  public function dispatch(Request $request)
+  {
+    if (
+      array_key_exists($request->method, $this->routes)
+      && array_key_exists($request->route, $this->routes[$request->method])
+    ) {
       $route_handler = $this->routes[$request->method][$request->route];
       $this->handle($request, $route_handler['controller'], $route_handler['handler']);
     } else {
       if ($request->route == "PHP_Rush_MVC")
-        header ('location:/PHP_Rush_MVC/auth/register');
+        header('location:/PHP_Rush_MVC/auth/register');
       else
-        header ('location:/PHP_Rush_MVC/error404');
+        header('location:/PHP_Rush_MVC/error404');
     }
   }
 }

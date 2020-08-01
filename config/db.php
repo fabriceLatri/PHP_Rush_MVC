@@ -2,8 +2,8 @@
 
 return [
   'dbname' => 'mvc',
-  'username' => 'root',
-  'password' => '',
+  'username' => 'fabrice',
+  'password' => 'L@RIb200506',
   'driver' => 'mysql',
   'host' => '127.0.0.1',
   'options' => [

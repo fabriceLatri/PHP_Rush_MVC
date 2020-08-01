@@ -12,11 +12,14 @@ class AuthController extends AppController
 {
   public function register_view(Request $request)
   {
-    return $this->render('auth/register.html.twig', ['base' => $request->base,
-      'error' => $this->flashError]);
+    return $this->render('auth/register.html.twig', [
+      'base' => $request->base,
+      'error' => $this->flashError
+    ]);
   }
 
-  public function register(Request $request) { 
+  public function register(Request $request)
+  {
     $user = new User();
     $user->setUsername($request->params['username']);
     $user->setEmail($request->params['email']);
@@ -40,7 +43,7 @@ class AuthController extends AppController
 
     $query->execute($array);
 
-    header ('location:/PHP_Rush_MVC/auth/login');
+    header('location:/PHP_Rush_MVC/auth/login');
 
     die();
   }
