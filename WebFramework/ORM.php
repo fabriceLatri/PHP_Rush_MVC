@@ -3,6 +3,8 @@
 namespace WebFramework;
 
 use \PDO;
+use App\Models\User;
+
 
 class ORM
 {
@@ -50,7 +52,7 @@ class ORM
         $config['options']
       );
       return $this->db;
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       echo $e->getMessage();
     }
   }
@@ -90,7 +92,21 @@ class ORM
     };
     $field = [$value => $values];
     $request = $this->db->prepare($model->$query());
-    $request->execute($field);
-    return $request->fetchAll(PDO::FETCH_ASSOC);
+    try {
+      $request->execute($field);
+
+      return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+      if ($e->getMessage() === "SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mvc.users' doesn't exist") {
+        $query = $this->db->prepare(User::createTableInDBIfNotExists());
+
+        $result = $query->execute();
+
+        if ($result) {
+          echo 'La table users n\'existe pas. Veuillez vous enregistrer SVP';
+          header('refresh:1; /PHP_Rush_MVC');
+        }
+      }
+    }
   }
 }

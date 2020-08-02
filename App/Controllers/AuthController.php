@@ -46,7 +46,7 @@ class AuthController extends AppController
       header('location:/PHP_Rush_MVC/auth/login');
     } catch (\Exception $e) {
       if ($e->getMessage() === "SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mvc.users' doesn't exist") {
-        $query = $this->orm->getDb()->prepare($user->createTableInDBIfNotExists());
+        $query = $this->orm->getDb()->prepare(User::createTableInDBIfNotExists());
 
         $query->execute();
 

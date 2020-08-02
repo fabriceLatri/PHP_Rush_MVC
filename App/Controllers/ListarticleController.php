@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use WebFramework\AppController;
-use WebFramework\Router;
 use WebFramework\Request;
 
 use App\Models\Article;
@@ -68,7 +67,8 @@ class ListarticleController extends AppController
     ]);
   }
 
-  public function editArticle(Request $request){
+  public function editArticle(Request $request)
+  {
     $article = new Article();
     $article->setId($request->params['id']);
     $article->setTitle($request->params['title']);
@@ -109,12 +109,13 @@ class ListarticleController extends AppController
     ]);
   }
 
-  public function deleteArticle(Request $request){
+  public function deleteArticle(Request $request)
+  {
     $article = new Article();
     $article->setId($request->params['id']);
     var_dump($_POST['id']);
     $deleteInfo = $this->orm->getDb()->prepare($article->deleteUserId());
-    $data = ["id" =>$request->params['id']];
+    $data = ["id" => $request->params['id']];
     $deleteInfo->execute($data);
 
     header('location:/PHP_Rush_MVC/articles/listArticle');

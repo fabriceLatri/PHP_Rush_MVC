@@ -124,7 +124,7 @@ class User
     return $err;
   }
 
-  public function createTableInDBIfNotExists()
+  public static function createTableInDBIfNotExists(): string
   {
     return "CREATE TABLE IF NOT EXISTS users (
       id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
