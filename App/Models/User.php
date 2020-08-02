@@ -124,6 +124,18 @@ class User
     return $err;
   }
 
+  public function createTableInDBIfNotExists()
+  {
+    return "CREATE TABLE IF NOT EXISTS users (
+      id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+      username VARCHAR(100),
+      email VARCHAR(255),
+      password VARCHAR(255),
+      creation_date DATETIME,
+      update_date DATETIME
+    )";
+  }
+
   public function addUser()
   {
     return "INSERT INTO users (username, email, password, creation_date, update_date) VALUES (:username, :email, :password, NOW(), NOW())";

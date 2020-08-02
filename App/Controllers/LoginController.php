@@ -3,9 +3,7 @@
 namespace App\Controllers;
 
 use WebFramework\AppController;
-use WebFramework\Router;
 use WebFramework\Request;
-use App\Helpers\Session;
 
 
 use App\Models\User;
@@ -14,11 +12,14 @@ class LoginController extends AppController
 {
   public function login_view(Request $request)
   {
-    return $this->render('auth/login.html.twig', ['base' => $request->base,
-      'error' => $this->flashError]);
+    return $this->render('auth/login.html.twig', [
+      'base' => $request->base,
+      'error' => $this->flashError
+    ]);
   }
 
-  public function login(Request $request) { 
+  public function login(Request $request)
+  {
     $user = new User();
     $user->setEmail($request->params['email']);
     $user->setPassword($request->params['password']);
@@ -31,16 +32,13 @@ class LoginController extends AppController
       return;
     }
 
-    $userInfo = $this->orm->prepareRequest($user,"selectUserEmail",['email']);
+    $userInfo = $this->orm->prepareRequest($user, "selectUserEmail", ['email']);
 
-    if (!empty($userInfo) && password_verify($request->params['password'], $userInfo[0]['password'])){
-      $this->session->set('id' , $userInfo[0]['id']);
+    if (!empty($userInfo) && password_verify($request->params['password'], $userInfo[0]['password'])) {
+      $this->session->set('id', $userInfo[0]['id']);
       $this->session->set('user_group', $userInfo[0]['user_group']);
       header('location:/PHP_Rush_MVC/articles/listArticle');
-
-    
-    }
-    else {
+    } else {
       echo 'Incorrect Email or Password';
       header('refresh:1; /PHP_Rush_MVC/auth/login');
     }

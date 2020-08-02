@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use WebFramework\AppController;
-use WebFramework\Router;
 use WebFramework\Request;
 
 use App\Models\User;
@@ -36,14 +35,28 @@ class AuthController extends AppController
 
     $query = $this->orm->getDb()->prepare($user->addUser());
     $array = [
-      'username' => $request->params['username'],
-      'email' => $request->params['email'],
-      'password' => password_hash($request->params['password'], PASSWORD_DEFAULT),
+      'username' => htmlentities($request->params['username']),
+      'email' => htmlentities($request->params['email']),
+      'password' => password_hash(htmlentities($request->params['password']), PASSWORD_DEFAULT),
     ];
 
-    $query->execute($array);
+    try {
+      $query->execute($array);
 
-    header('location:/PHP_Rush_MVC/auth/login');
+      header('location:/PHP_Rush_MVC/auth/login');
+    } catch (\Exception $e) {
+      if ($e->getMessage() === "SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mvc.users' doesn't exist") {
+        $query = $this->orm->getDb()->prepare($user->createTableInDBIfNotExists());
+
+        $query->execute();
+
+        $this->register($request);
+      } else {
+        $this->flashError->set($e->getMessage());
+        $this->redirect('/' . $request->base . 'auth/register', '302');
+      }
+    }
+
 
     die();
   }
