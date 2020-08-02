@@ -104,7 +104,6 @@ class ORM
 
         if ($result) {
           echo 'La table users n\'existe pas. Veuillez vous enregistrer SVP';
-          header('refresh:1; /PHP_Rush_MVC');
         }
       }
     }

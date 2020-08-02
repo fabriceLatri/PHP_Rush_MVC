@@ -34,10 +34,13 @@ class LoginController extends AppController
 
     $userInfo = $this->orm->prepareRequest($user, "selectUserEmail", ['email']);
 
+
     if (!empty($userInfo) && password_verify($request->params['password'], $userInfo[0]['password'])) {
       $this->session->set('id', $userInfo[0]['id']);
       $this->session->set('user_group', $userInfo[0]['user_group']);
       header('location:/PHP_Rush_MVC/articles/listArticle');
+    } else if (is_null($userInfo)) {
+      header('refresh:1; /PHP_Rush_MVC');
     } else {
       echo 'Incorrect Email or Password';
       header('refresh:1; /PHP_Rush_MVC/auth/login');
