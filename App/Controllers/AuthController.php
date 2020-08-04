@@ -25,6 +25,8 @@ class AuthController extends AppController
     $user->setPassword($request->params['password']);
     $user->setPasswordVerify($request->params['passwordVerify']);
 
+    // $this->orm->persist($user);
+
     try {
       $user->validate();
     } catch (\Exception $e) {
