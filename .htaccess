@@ -1,7 +1,12 @@
 RewriteEngine on
-RewriteBase /PHP_Rush_MVC/
+
+RewriteBase /PHP_Rush_MVC/WebRoot/
 RewriteRule /WebRoot [L]
 RewriteRule (.*) WebRoot/$1 [L]
+
+RewriteBase /PHP_Rush_MVC/
+RewriteRule /testingHTA [L]
+RewriteRule (.*) testingHTA/$1 [L]
 
 # Displaying php errors
 php_flag display_errors on
